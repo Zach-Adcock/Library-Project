@@ -1,5 +1,5 @@
 
-#Project: [Library] ("")
+# Project: [Library] ("")
 
 ##Overview
 This project utilizes HTML, CSS, and Javascript to create a library of the user's books. Data is stored in local storage.
