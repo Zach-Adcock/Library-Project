@@ -20,29 +20,43 @@
 
 
 
-<form action="" method="post">
-    <ul>
-        <li>
-            <label for="title">Title:</label>
-            <input type="text" id="title" name="book-title">
-        </li>
-        <li>
-            <label for="author">Author:</label>
-            <input type="text" id="author" name="book-author">
-        </li>
-        <li>
-            <label for="pages">Pages:</label>
-            <input type="text" id="pages" name="book-pages">
-        </li>
-        <li>
-            <label for="read">Read:</label>
-            <input type="checkbox" id="read" name="book-read">
-        </li>
-        <li class="button">
-            <button type="submit">Add Book</button>
-        </li>
-    </ul>
-</form>
+
+    <button data-modal-target="#modal" id="new-book-btn">New Book</button>
+    <div class="modal" id="book-modal">
+        <div class="modal-header">
+            <div class="title">Add New Book to Library</div>
+            <button data-close-btn class="close-btn" id="close-btn">&times;</button>
+        </div>
+        <div class="modal-content">
+            
+            <form  id="book-form" class="form">
+                <ul>
+                    <li>
+                        <label for="title-input">Title</label>
+                        <input type="text" id="title-input" name="book-title" required>
+                    </li>
+                    <li>
+                        <label for="author-input">Author</label>
+                        <input type="text" id="author-input" name="book-author" required>
+                    </li>
+                    <li>
+                        <label for="pages-input">Pages</label>
+                        <input type="text" id="pages-input" name="book-pages" min="1" required>
+                    </li>
+                    <li>
+                        <label for="read-input">Read</label>
+                        <input type="checkbox" id="read-input" name="book-read" value="read">
+                    </li>
+                    <li class="button">
+                        <button type="submit" id="btn">Add Book</button>
+                    </li>
+                </ul>
+            </form>
+        </div>
+    </div>
+    <div id="overlay"></div>
+
+
 
 
 
