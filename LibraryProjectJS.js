@@ -5,40 +5,28 @@ libraryBooks = [
     {title: 'Title1',
     author: 'Author1',
     pages: 100,
-    read: true
+    read: 'Read'
     },
     {title: 'Title2',
     author: 'Author2',
     pages: 200,
-    read: false
+    read: 'Not Read'
     },
     {title: 'Title3',
     author: 'Author3',
     pages: 300,
-    read: true
+    read: 'Read'
     }
 ];
 
 //Book constructor
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.read = read;
-    this.info = function(){
-        return `${title}, ${author}, ${pages}, ${read}`
+class Book{
+    constructor (title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
     }
-};
-
-// Function to add Book to libraryBooks array
-const addBooktoLibrary = () => {
-    var title = window.prompt("Title?");
-    var author = window.prompt("Author?");
-    var pages = parseInt(window.prompt("Pages?"));
-    var read = window.prompt("Read?").toLocaleLowerCase();
-    title = new Book(title,author,pages,(read==='true'));
-    libraryBooks.push(title);
-
 };
 
 
@@ -77,25 +65,36 @@ document.addEventListener('DOMContentLoaded', () => {
         cardRead.innerText = book.read;
         cardRead.className = 'book-read';
 
+        //Delete and read Toggle into one div
         const deleteBook = document.createElement('button');
         deleteBook.innerText = 'Remove';
         deleteBook.className = 'book-deleter';
 
-        const readToggle = document.createElement('button');
-        readToggle.innerText = 'Read';
-        readToggle.className = 'book-deleter';
+        const readSymbol = document.createElement('i');
+        if (book.read == 'Read'){
+            readSymbol.classList.add('fas', 'fa-book-open')
+        } else if (book.read == 'Not Read'){
+            readSymbol.classList.add('fas', 'fa-book')
+        }
+        readSymbol.classList.add('book-read-toggle');
+        
+        const bookModifications = document.createElement('div');
+        bookModifications.className = 'book-modifications';
+        bookModifications.append(deleteBook, readSymbol);
 
-        card.append(cardTitle,cardAuthor,cardPages,cardRead);
+        card.append(cardTitle,cardAuthor,cardPages,cardRead, bookModifications);
         cardContainer.append(card);
+
     }
 
 
-    //create new book button
-    // let newBookButton = document.createElement("button");
-    // newBookButton.innerText = "New Book";
-    // newBookButton.id = "new-book-btn";
-    // newBookButton.dataset.modal.target = "#modal"
-    // document.body.append(newBookButton);
+//   //Closed Book Icon
+//   const closedBook = document.createElement('i');
+//   closedBook.className = "fas fa-book";
+
+//   //Open Book Icon
+//   const openBook = document.createElement('i');
+//   openBook.className = "fas fa-book-open";
 
     displayBooks();
 
@@ -145,19 +144,56 @@ document.addEventListener('DOMContentLoaded', () => {
         let readValue = document.getElementById('read-input').checked ;
         readValue = (readValue == true) ? 'Read' : 'Not Read'; //determine if the read checkbox was ticked
 
-        const book = {
-            title: document.getElementById('title-input').value,
-            author: document.getElementById('author-input').value,
-            pages: document.getElementById('pages-input').value,
-            read: readValue
-        }
+        
+        let title = document.getElementById('title-input').value;
+        let author = document.getElementById('author-input').value;
+        let pages = document.getElementById('pages-input').value;
+        let read = readValue;
+        let book = new Book(title,author,pages,read);
+
         libraryBooks.push(book);
         displayNewBook(book);
         document.querySelector('form').reset();
         closeModal(document.getElementById('book-modal')); //closes modal after submitting book
 
         console.log("Form has been submitted")
-    })
+    });
+
+    //Remove book from library when remove button is clicked
+
+    document.addEventListener('click', e => {
+        if (e.target.matches('.book-deleter')) {
+            const div = e.target;
+            deleteBook(div);
+        }
+    });
+
+
+    function deleteBook(div){
+        const titleCard = div.closest('.book-card').querySelector('.book-title');
+        console.log(titleCard.innerText)
+        const newLibraryArray = libraryBooks.filter(book => book.title !== titleCard.innerText) ;
+        libraryBooks = newLibraryArray;
+        const toRemove = div.closest('.book-card');
+        toRemove.remove();
+    };
+
+    //Closed Book Icon
+    const closedBook = document.createElement('i');
+    closedBook.className = "fas fa-book";
+    document.body.append(closedBook)
+
+
+    //Open Book Icon
+    const openBook = document.createElement('i');
+    openBook.className = "fas fa-book-open";
+    document.body.append(openBook)
+
+    // function toggleIcon(read) {
+    //     if (read == '') {
+    //         if 
+    //     }
+    // }
 
 })
 
