@@ -87,8 +87,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     };
 
-
-    displayBooks();
+    
 
 
 
@@ -147,6 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
         displayNewBook(book);
         document.querySelector('form').reset();
         closeModal(document.getElementById('book-modal')); //closes modal after submitting book
+        updateStorage();
 
         console.log("Form has been submitted")
     });
@@ -168,6 +168,8 @@ document.addEventListener('DOMContentLoaded', () => {
         libraryBooks = newLibraryArray;
         const toRemove = div.closest('.book-card');
         toRemove.remove();
+        updateStorage();
+
     };
 
     //Closed Book Icon
@@ -190,6 +192,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon.closest('.book-card').querySelector('.book-read').innerText = 'Not Read'; //Modify text from Read to Not Read
                 const objIndex = libraryBooks.findIndex(obj => obj.title == title);
                 libraryBooks[objIndex].read = 'Not Read';
+                updateStorage();
+
 
 
             } else if (icon.classList.contains('fa-book')) { //If icon book is closed, open it
@@ -198,10 +202,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 icon.closest('.book-card').querySelector('.book-read').innerText = 'Read'; //Modify text from Not Read to Read
                 const objIndex = libraryBooks.findIndex(obj => obj.title == title);
                 libraryBooks[objIndex].read = 'Read';
-                
+                updateStorage();
             };
         };
     });
 
+
+
+    //Set up local storage
+    const checkStorage = function() {
+        if(!localStorage.getItem('libraryBooks')) {
+            //Load preset library array
+            displayBooks();
+            return
+        } else {
+            libraryBooks = JSON.parse(localStorage.getItem('libraryBooks'));
+            displayBooks();
+        }
+    };
+
+
+    const updateStorage = function() {
+        localStorage.setItem('libraryBooks', JSON.stringify(libraryBooks));
+    };
+    checkStorage()
 })
 
