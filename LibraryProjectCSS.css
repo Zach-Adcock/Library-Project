@@ -3,27 +3,42 @@
 .main{
     display: flex;
     justify-content: center;
-    margin: 40px 20px;
+    margin: 0px 20px;
     flex-direction: column;
 }
 
+h1 {
+    font-size: 45px;
+    border-bottom: 3px solid black;
+}
 .book-container{
 
     border: 2px solid black;
+    background-color: rgb(255, 173, 144);
     height: auto;
+    min-height: 600px;
     width: 1000px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     /* grid-auto-rows: 80px; */
     padding: 30px 30px;
+    margin-left: auto;
+    margin-right: auto;
+}
 
+#new-book-btn {
+    width: 200px;
+    height: 50px;
+    margin: 0px auto 30px auto;
 }
 
 .book-card {
-    border: 1px solid green;
-    height: 200px;
-    width: 150px;
+    border: 1px solid black;
+    border-radius: 15px;
+    height: 250px;
+    width: 185px;
     margin: 15px 15px;
+    background-color: cadetblue;
 
 
     display: flex;

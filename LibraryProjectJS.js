@@ -2,20 +2,20 @@
 
 //Create array for books
 libraryBooks = [
-    {title: 'Title1',
-    author: 'Author1',
-    pages: 100,
+    {title: 'Catch 22',
+    author: 'Joseph Heller',
+    pages: '453',
     read: 'Read'
     },
-    {title: 'Title2',
-    author: 'Author2',
-    pages: 200,
+    {title: 'The Catcher in the Rye',
+    author: 'J.D. Salinger',
+    pages: '277',
+    read: 'Read'
+    },
+    {title: 'The Davinci Code',
+    author: 'Dan Brown',
+    pages: '689',
     read: 'Not Read'
-    },
-    {title: 'Title3',
-    author: 'Author3',
-    pages: 300,
-    read: 'Read'
     }
 ];
 
@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
         const cardPages = document.createElement('div')
-        cardPages.innerText = "Number of pages: " + book.pages;
+        cardPages.innerText = "Pages: " + book.pages;
         cardPages.className = 'book-pages';
 
         const cardRead = document.createElement('div')
@@ -85,16 +85,8 @@ document.addEventListener('DOMContentLoaded', () => {
         card.append(cardTitle,cardAuthor,cardPages,cardRead, bookModifications);
         cardContainer.append(card);
 
-    }
+    };
 
-
-//   //Closed Book Icon
-//   const closedBook = document.createElement('i');
-//   closedBook.className = "fas fa-book";
-
-//   //Open Book Icon
-//   const openBook = document.createElement('i');
-//   openBook.className = "fas fa-book-open";
 
     displayBooks();
 
@@ -181,19 +173,35 @@ document.addEventListener('DOMContentLoaded', () => {
     //Closed Book Icon
     const closedBook = document.createElement('i');
     closedBook.className = "fas fa-book";
-    document.body.append(closedBook)
 
 
     //Open Book Icon
     const openBook = document.createElement('i');
     openBook.className = "fas fa-book-open";
-    document.body.append(openBook)
 
-    // function toggleIcon(read) {
-    //     if (read == '') {
-    //         if 
-    //     }
-    // }
+    // function toggleIcon 
+    document.addEventListener('click', e => {
+        if (e.target.matches('.fas')) {
+            const icon = e.target;
+            const title = icon.closest('.book-card').querySelector('.book-title').innerText;
+            if (icon.classList.contains('fa-book-open')){ //If icon book is open, close it
+                icon.classList.remove('fa-book-open');
+                icon.classList.add('fa-book');
+                icon.closest('.book-card').querySelector('.book-read').innerText = 'Not Read'; //Modify text from Read to Not Read
+                const objIndex = libraryBooks.findIndex(obj => obj.title == title);
+                libraryBooks[objIndex].read = 'Not Read';
+
+
+            } else if (icon.classList.contains('fa-book')) { //If icon book is closed, open it
+                icon.classList.remove('fa-book');
+                icon.classList.add('fa-book-open');
+                icon.closest('.book-card').querySelector('.book-read').innerText = 'Read'; //Modify text from Not Read to Read
+                const objIndex = libraryBooks.findIndex(obj => obj.title == title);
+                libraryBooks[objIndex].read = 'Read';
+                
+            };
+        };
+    });
 
 })
 

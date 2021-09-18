@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>Library Project</title>
+    <link rel="icon" href="Image Links/StackedBooks.png" type="image/x-icon">
+
+    <link rel="shortcut icon" href="Image Links/StackedBooks.png" type="image/x-icon">
 
 
 
@@ -13,11 +16,8 @@
 <body>
 <main class="main">
 
-
-    <div class="book-container" id="book-cards-container">
-
-
-    </div>
+    <h1>Your Library</h1>
+    
 
 
 
@@ -42,7 +42,7 @@
                     </li>
                     <li>
                         <label for="pages-input">Pages</label>
-                        <input type="text" id="pages-input" name="book-pages" min="1" required>
+                        <input type="number" id="pages-input" name="book-pages" min="1" required>
                     </li>
                     <li>
                         <label for="read-input">Read</label>
@@ -57,8 +57,7 @@
     </div>
     <div id="overlay"></div>
 
-    <div>Divv</div>
-
+    <div class="book-container" id="book-cards-container"></div>
 
 
 
