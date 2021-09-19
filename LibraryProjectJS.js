@@ -163,7 +163,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function deleteBook(div){
         const titleCard = div.closest('.book-card').querySelector('.book-title');
-        console.log(titleCard.innerText)
         const newLibraryArray = libraryBooks.filter(book => book.title !== titleCard.innerText) ;
         libraryBooks = newLibraryArray;
         const toRemove = div.closest('.book-card');
@@ -206,6 +205,17 @@ document.addEventListener('DOMContentLoaded', () => {
             };
         };
     });
+
+
+    //Clear Library Button
+    const clearBtn = document.getElementById('clear-btn');
+    clearBtn.addEventListener('click', () => {
+        document.querySelectorAll('.book-card').forEach((item) => item.remove());
+        libraryBooks = [];
+        localStorage.setItem('libraryBooks', JSON.stringify(libraryBooks));
+
+    });
+
 
 
 
